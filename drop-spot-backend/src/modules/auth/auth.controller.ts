@@ -41,4 +41,18 @@ export class AuthController {
       data: user,
     };
   }
+  @HttpCode(200)
+  @Post('logout')
+  async logout(@Res({ passthrough: true }) res: any) {
+    res.clearCookie('jwt', {
+      httpOnly: true,
+      secure: process.env.PROJECT_ENV === 'prod',
+      sameSite: 'lax',
+    });
+
+    return {
+      success: true,
+      message: 'Logout successful',
+    };
+  }
 }
