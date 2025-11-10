@@ -1,10 +1,11 @@
 import { Form, Input, Button } from 'antd';
 import { MailOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 import type { FormProps } from 'antd';
+import { registerService } from '../../features/auth/services/register';
 
 type UserRegister = {
-  firstName: string;
-  lastName: string;
+  name: string;
+  surName: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -13,8 +14,10 @@ type UserRegister = {
 export default function Register() {
   const [form] = Form.useForm();
 
-  const onFinish: FormProps<UserRegister>['onFinish'] = (values) => {
+  const onFinish: FormProps<UserRegister>['onFinish'] = async (values) => {
     console.log(values);
+    const respones = await registerService(values);
+    console.log(respones);
   };
 
   const onFinishFailed: FormProps<UserRegister>['onFinishFailed'] = (errorInfo) => {
@@ -41,7 +44,7 @@ export default function Register() {
         >
           <Form.Item
             label="İsim"
-            name="firstName"
+            name="name"
             rules={[{ required: true, message: 'Lütfen isminizi giriniz!' }]}
           >
             <Input
@@ -53,7 +56,7 @@ export default function Register() {
 
           <Form.Item
             label="Soyisim"
-            name="lastName"
+            name="surName"
             rules={[{ required: true, message: 'Lütfen soyisminizi giriniz!' }]}
           >
             <Input

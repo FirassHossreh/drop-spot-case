@@ -1,6 +1,7 @@
 import { Form, Input, Button } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import type { FormProps } from 'antd';
+import { loginService } from '../../features/auth/services/login';
 
 type UserLogin = {
   email: string;
@@ -10,8 +11,10 @@ type UserLogin = {
 export default function Login() {
   const [form] = Form.useForm();
 
-  const onFinish: FormProps<UserLogin>['onFinish'] = (values) => {
+  const onFinish: FormProps<UserLogin>['onFinish'] = async (values) => {
     console.log(values);
+    const respones = await loginService(values);
+    console.log(respones);
   };
 
   const onFinishFailed: FormProps<UserLogin>['onFinishFailed'] = (errorInfo) => {
