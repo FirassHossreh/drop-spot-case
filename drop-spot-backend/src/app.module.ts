@@ -3,7 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './modules/auth/user.entity';
 import { AuthModule } from './modules/auth/auth.module';
+import { DropsController } from './modules/drops/drops.controller';
+import { DropsModule } from './modules/drops/drops.module';
 
 @Module({
   imports: [
@@ -27,6 +30,7 @@ import { AuthModule } from './modules/auth/auth.module';
       },
     }),
     AuthModule,
+    DropsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
