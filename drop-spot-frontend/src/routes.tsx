@@ -6,6 +6,7 @@ import Home from './pages/home';
 import AdminHome from './pages/admin-home';
 import ClientLayout from './layouts/client-layout';
 import AdminLayout from './layouts/admin-layout';
+import AdminDrops from './pages/AdminDrops';
 export default function AppRoutes() {
   return (
     <Routes>
@@ -16,8 +17,9 @@ export default function AppRoutes() {
       <Route element={<ClientLayout />}>
         <Route index path="/" element={<Home />} />
       </Route>
-      <Route element={<AdminLayout />}>
-        <Route index path="/dashboard" element={<AdminHome />} />
+      <Route path="/dashboard" element={<AdminLayout />}>
+        <Route index path="" element={<AdminHome />} />
+        <Route index path="drops" element={<AdminDrops />} />
       </Route>
     </Routes>
   );
