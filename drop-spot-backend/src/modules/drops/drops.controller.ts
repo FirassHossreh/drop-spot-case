@@ -31,18 +31,34 @@ export class DropsController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  create(@Body() body: CreateDropDto) {
-    return this.dropsService.create(body);
+  async create(@Body() body: CreateDropDto) {
+    const created = await this.dropsService.create(body);
+    console.log(created);
+    return {
+      success: true,
+      message: 'added drops',
+      data: created,
+    };
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() body: UpdateDropDto) {
-    return this.dropsService.update(id, body);
+  async update(@Param('id') id: string, @Body() body: UpdateDropDto) {
+    const updated = await this.dropsService.update(id, body);
+    return {
+      success: true,
+      message: 'updated drops',
+      data: updated,
+    };
   }
 
   @Delete(':id')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  remove(@Param('id') id: string) {
-    return this.dropsService.remove(id);
+  @HttpCode(200)
+  async remove(@Param('id') id: string) {
+    const deleted = await this.dropsService.remove(id);
+    return {
+      success: true,
+      message: 'deleted drops',
+      data: deleted,
+    };
   }
 }

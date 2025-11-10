@@ -6,7 +6,7 @@ import Home from './pages/home';
 import AdminHome from './pages/admin-home';
 import ClientLayout from './layouts/client-layout';
 import AdminLayout from './layouts/admin-layout';
-import AdminDrops from './pages/AdminDrops';
+import AdminDrops from './pages/Admin-drops';
 export default function AppRoutes() {
   return (
     <Routes>

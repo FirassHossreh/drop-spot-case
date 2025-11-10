@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, DataSource } from 'typeorm';
 import { Drop } from './drop.entity';
@@ -24,8 +20,7 @@ export class DropsService {
     const drop = this.dropsRepo.create({
       ...body,
       startAt: new Date(body.startAt),
-      endAt: body.endAt ? new Date(body.endAt) : undefined, // <- undefined kullan
-      //   remaining: dto.totalQuantity,
+      endAt: body.endAt ? new Date(body.endAt) : undefined,
     });
     const saved = await this.dropsRepo.save(drop);
     return saved;
@@ -36,17 +31,18 @@ export class DropsService {
     if (!exist) throw new NotFoundException('Drop not found.');
 
     Object.assign(exist, body);
-    return this.dropsRepo.save(exist);
+    const updated = await this.dropsRepo.save(exist);
+    return updated;
   }
 
   async remove(id: string) {
     const exist = await this.dropsRepo.findOne({ where: { id } });
     if (!exist) throw new NotFoundException('Drop not found.');
-    // soft delete
-    return this.dropsRepo.remove(exist);
+    const deleted = await this.dropsRepo.remove(exist);
+    return deleted;
   }
 
-  //   // transactional örnek: bir drop oluştururken başka tablolar da güncellenecekse:
+  // transactional örnek: bir drop oluştururken başka tablolar da güncellenecekse:
   //   async createWithTransaction(dto: CreateDropDto) {
   //     const queryRunner = this.dataSource.createQueryRunner();
   //     await queryRunner.connect();

@@ -12,7 +12,6 @@ export class JwtAuthGuard implements CanActivate {
   constructor(private jwtService: JwtService) {}
 
   canActivate(context: ExecutionContext) {
-    console.log('firass auth');
     const req = context.switchToHttp().getRequest<Request>();
     const token = (req as any).cookies?.jwt;
     if (!token) throw new UnauthorizedException('Token bulunamadı');

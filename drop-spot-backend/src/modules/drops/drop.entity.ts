@@ -19,7 +19,7 @@ export class Drop {
   description?: string;
 
   @Column({ type: 'timestamp' })
-  startAt: Date; // drop zamanı / claim window başlangıcı
+  startAt: Date;
 
   @Column({ type: 'timestamp', nullable: true })
   endAt?: Date;
