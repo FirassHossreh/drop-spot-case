@@ -14,11 +14,11 @@ export class JwtAuthGuard implements CanActivate {
   canActivate(context: ExecutionContext) {
     const req = context.switchToHttp().getRequest<Request>();
     const token = (req as any).cookies?.jwt;
-    if (!token) throw new UnauthorizedException('Token bulunamadı');
+    if (!token) throw new UnauthorizedException({ message: '' });
 
     try {
       const payload = this.jwtService.verify(token);
-
+      console.log(payload);
       (req as any).user = payload;
       return true;
     } catch (err) {

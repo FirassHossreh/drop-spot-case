@@ -3,6 +3,8 @@ import { MailOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 import type { FormProps } from 'antd';
 import { registerService } from '../../features/auth/services/register';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../providers/auth-provider';
 
 type UserRegister = {
   name: string;
@@ -15,11 +17,15 @@ type UserRegister = {
 export default function Register() {
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const { setUser } = useContext(AuthContext);
 
   const onFinish: FormProps<UserRegister>['onFinish'] = async (values) => {
-    const respones = await registerService(values);
-    if (respones.success === true) {
-      if (respones.data.roles === 'admin') {
+    const responese = await registerService(values);
+    console.log(responese);
+    setUser(responese.data);
+
+    if (responese.success === true) {
+      if (responese.data.roles === 'admin') {
         navigate('/dashboard');
       } else {
         navigate('/');

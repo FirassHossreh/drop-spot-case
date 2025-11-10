@@ -3,6 +3,8 @@ import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import type { FormProps } from 'antd';
 import { loginService } from '../../features/auth/services/login';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../providers/auth-provider';
 
 type UserLogin = {
   email: string;
@@ -12,10 +14,15 @@ type UserLogin = {
 export default function Login() {
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const { setUser } = useContext(AuthContext);
+
   const onFinish: FormProps<UserLogin>['onFinish'] = async (values) => {
-    const respones = await loginService(values);
-    if (respones.success === true) {
-      if (respones.data.roles === 'admin') {
+    const responese = await loginService(values);
+    setUser(responese.data);
+
+    if (responese.success === true) {
+      console.log(responese.data.roles);
+      if (responese.data.roles === 'admin') {
         navigate('/dashboard');
       } else {
         navigate('/');
