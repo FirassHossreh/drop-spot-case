@@ -1,7 +1,17 @@
-import { Controller, Post, Body, Res, HttpCode } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Res,
+  HttpCode,
+  UseGuards,
+  Req,
+  Get,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -41,6 +51,7 @@ export class AuthController {
       data: user,
     };
   }
+
   @HttpCode(200)
   @Post('logout')
   async logout(@Res({ passthrough: true }) res: any) {
@@ -53,6 +64,15 @@ export class AuthController {
     return {
       success: true,
       message: 'Logout successful',
+    };
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('me')
+  me(@Req() req: any) {
+    return {
+      success: true,
+      data: req.user,
     };
   }
 }
