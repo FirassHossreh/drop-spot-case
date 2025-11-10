@@ -3,6 +3,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Sidebar from '../features/admin/components/sidebar';
 import Header from '../features/admin/components/header';
 import LogoutModal from '../features/admin/components/logout-modal';
+import { logoutService } from '../features/auth/services/logout';
 
 export default function AdminLayout() {
   const [collapsed, setCollapsed] = useState(false);
@@ -12,9 +13,10 @@ export default function AdminLayout() {
   const navigate = useNavigate();
   const paths = location.pathname.split('/').filter(Boolean);
 
-  const handleLogout = () => {
-    console.log('Çıkış yapılıyor...');
+  const handleLogout = async () => {
+    await logoutService();
     setShowLogoutModal(false);
+
     navigate('/login');
   };
 
