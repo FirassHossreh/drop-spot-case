@@ -2,6 +2,7 @@ import { Form, Input, Button } from 'antd';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import type { FormProps } from 'antd';
 import { loginService } from '../../features/auth/services/login';
+import { useNavigate } from 'react-router-dom';
 
 type UserLogin = {
   email: string;
@@ -10,11 +11,16 @@ type UserLogin = {
 
 export default function Login() {
   const [form] = Form.useForm();
-
+  const navigate = useNavigate();
   const onFinish: FormProps<UserLogin>['onFinish'] = async (values) => {
-    console.log(values);
     const respones = await loginService(values);
-    console.log(respones);
+    if (respones.success === true) {
+      if (respones.data.roles === 'admin') {
+        navigate('/dashboard');
+      } else {
+        navigate('/');
+      }
+    }
   };
 
   const onFinishFailed: FormProps<UserLogin>['onFinishFailed'] = (errorInfo) => {

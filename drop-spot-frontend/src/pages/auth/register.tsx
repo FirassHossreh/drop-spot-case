@@ -2,6 +2,7 @@ import { Form, Input, Button } from 'antd';
 import { MailOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 import type { FormProps } from 'antd';
 import { registerService } from '../../features/auth/services/register';
+import { useNavigate } from 'react-router-dom';
 
 type UserRegister = {
   name: string;
@@ -13,11 +14,17 @@ type UserRegister = {
 
 export default function Register() {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
 
   const onFinish: FormProps<UserRegister>['onFinish'] = async (values) => {
-    console.log(values);
     const respones = await registerService(values);
-    console.log(respones);
+    if (respones.success === true) {
+      if (respones.data.roles === 'admin') {
+        navigate('/dashboard');
+      } else {
+        navigate('/');
+      }
+    }
   };
 
   const onFinishFailed: FormProps<UserRegister>['onFinishFailed'] = (errorInfo) => {
