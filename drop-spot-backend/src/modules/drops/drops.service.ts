@@ -124,9 +124,9 @@ export class DropsService {
       if (exist) throw new BadRequestException('Already joined waitlist');
 
       const seed = this.generateSeed(
-        'git@github.com:user/repo.git',
-        '1699500000',
-        '202511111200',
+        'https://github.com/FirassHossreh/drop-spot-case.git',
+        '1762555579',
+        '20251181230',
       );
       const priorityScore = this.calculatePriorityScore(
         seed,
@@ -159,9 +159,9 @@ export class DropsService {
       });
 
       const seed = this.generateSeed(
-        'git@github.com:user/repo.git',
-        '1699500000',
-        '202511111200',
+        'https://github.com/FirassHossreh/drop-spot-case.git',
+        '1762555579',
+        '20251181230',
       );
       const priorityScore = this.calculatePriorityScore(
         seed,
