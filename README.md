@@ -19,7 +19,8 @@ normal user ekrani
 18. Teknik tercihler ve kişisel katkılar : aslinda bu uygulama yaparken transaction yapisi ve Idempotency yaklaşımı bilmiyordum ve bu proje sayisinde ogrenmis oldum ve kendim olarak biraz daha pratik yaptim
 19. Seed üretim yöntemi ve proje içindeki kullanımı : aslinda pdfte soylendigi gibi yaptim anladigim kadariyla , proje baslama tarihi , git reposu urlisi ve ilk commit atma tarihi sonrada birlestirip hashliyoruz.
 20. 9.	Bonus: AI entegrasyonu : yapilmadi maalesef , zamanim kalmadi proje teslim suresine
-kisisel not : merhaba size son olarak bir mesaj yazmak istedim aslinda ben bu proje yaparken cok sey ogrendim ama ben gercekten buyuk capli projeler gelistirmek istiyorum ve kendimi daha da ogrenip daha iyi seyler yapmak istiyorum biliyorum yine mezunuyum ama inaniyorumki cok buyuk calisma temposu olan yerde cok sey ogrenirim ve guzel seye yapabilirim
+
+kisisel not : merhaba size son olarak bir mesaj yazmak istedim aslinda ben bu proje yaparken cok sey ogrendim . ve buyuk capli projeler gelistirmek için kendimi geliştirmek istiyorum ve kendimi daha da ogrenip daha iyi seyler yapmak istiyorum . biliyorum yine mezunuyum ama inaniyorumki cok buyuk calisma temposu olan bir yerde cok sey ogrenirim ve guzel seye yapabilirim .ben çok isterimki bir mülakat tecrübem olsun ve kendimi daha iyi bir şekilde anlatabileyim . okdunuz için teşekkür ederim
         
 
        
