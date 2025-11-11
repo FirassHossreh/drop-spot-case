@@ -11,7 +11,7 @@ export default function Header({ breadcrumbs }: HeaderProps) {
       <div className="flex items-center text-gray-600">
         <Link to="/dashboard" className="flex items-center hover:text-gray-900 transition-colors">
           <HomeOutlined className="mr-2" />
-          <span>Anasayfa</span>
+          <span>Home</span>
         </Link>
 
         {breadcrumbs.slice(1).map((crumb, idx) => (

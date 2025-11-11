@@ -28,6 +28,15 @@ export class User {
   @Column({ type: 'varchar', default: 'user' })
   roles: UserRole;
 
+  @Column({ type: 'int', default: 0 })
+  signupLatencyMs: number;
+
+  @Column({ type: 'int', default: 0 })
+  accountAgeDays: number;
+
+  @Column({ type: 'int', default: 0 })
+  rapidActions: number;
+
   @CreateDateColumn({ type: 'timestamp' })
   createdAt: Date;
 
