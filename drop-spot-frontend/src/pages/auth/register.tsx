@@ -20,12 +20,12 @@ export default function Register() {
   const { setUser } = useContext(AuthContext);
 
   const onFinish: FormProps<UserRegister>['onFinish'] = async (values) => {
-    const responese = await registerService(values);
-    console.log(responese);
-    setUser(responese.data);
+    const response = await registerService(values);
+    console.log(response);
+    setUser(response.data);
 
-    if (responese.success === true) {
-      if (responese.data.roles === 'admin') {
+    if (response.success === true) {
+      if (response.data.roles === 'admin') {
         navigate('/dashboard');
       } else {
         navigate('/');
@@ -41,8 +41,8 @@ export default function Register() {
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">Hesap Oluştur</h2>
-          <p className="text-gray-500">Yeni bir hesap oluşturun</p>
+          <h2 className="text-3xl font-bold text-gray-800 mb-2">Create Account</h2>
+          <p className="text-gray-500">Create a new account</p>
         </div>
 
         <Form
@@ -56,72 +56,78 @@ export default function Register() {
           validateTrigger="onSubmit"
         >
           <Form.Item
-            label="İsim"
+            label="First Name"
             name="name"
-            rules={[{ required: true, message: 'Lütfen isminizi giriniz!' }]}
+            rules={[{ required: true, message: 'Please enter your first name!' }]}
           >
             <Input
               prefix={<UserOutlined className="text-gray-400" />}
-              placeholder="İsim"
+              placeholder="First Name"
               className="rounded-lg"
             />
           </Form.Item>
 
           <Form.Item
-            label="Soyisim"
+            label="Last Name"
             name="surName"
-            rules={[{ required: true, message: 'Lütfen soyisminizi giriniz!' }]}
+            rules={[{ required: true, message: 'Please enter your last name!' }]}
           >
             <Input
               prefix={<UserOutlined className="text-gray-400" />}
-              placeholder="Soyisim"
+              placeholder="Last Name"
               className="rounded-lg"
             />
           </Form.Item>
 
           <Form.Item
-            label="E-mail"
+            label="Email"
             name="email"
             rules={[
-              { required: true, message: 'Lütfen e-mail adresinizi giriniz!' },
-              { type: 'email', message: 'Geçerli bir e-mail giriniz!' },
+              { required: true, message: 'Please enter your email address!' },
+              { type: 'email', message: 'Please enter a valid email address!' },
             ]}
           >
-            <Input prefix={<MailOutlined className="text-gray-400" />} className="rounded-lg" />
+            <Input
+              prefix={<MailOutlined className="text-gray-400" />}
+              placeholder="Email"
+              className="rounded-lg"
+            />
           </Form.Item>
 
           <Form.Item
-            label="Şifre"
+            label="Password"
             name="password"
             rules={[
-              { required: true, message: 'Lütfen şifrenizi giriniz!' },
-              { min: 6, message: 'Şifre en az 6 karakter olmalıdır!' },
+              { required: true, message: 'Please enter your password!' },
+              { min: 6, message: 'Password must be at least 6 characters!' },
             ]}
           >
             <Input.Password
               prefix={<LockOutlined className="text-gray-400" />}
+              placeholder="Password"
               className="rounded-lg"
             />
           </Form.Item>
 
           <Form.Item
-            label="Şifre Tekrar"
+            label="Confirm Password"
             name="confirmPassword"
             dependencies={['password']}
             rules={[
-              { required: true, message: 'Lütfen şifrenizi tekrar giriniz!' },
+              { required: true, message: 'Please confirm your password!' },
               ({ getFieldValue }) => ({
                 validator(_, value) {
                   if (!value || getFieldValue('password') === value) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(new Error('Şifreler eşleşmiyor!'));
+                  return Promise.reject(new Error('Passwords do not match!'));
                 },
               }),
             ]}
           >
             <Input.Password
               prefix={<LockOutlined className="text-gray-400" />}
+              placeholder="Confirm Password"
               className="rounded-lg"
             />
           </Form.Item>
@@ -132,16 +138,16 @@ export default function Register() {
               htmlType="submit"
               className="w-full h-11 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold"
             >
-              Kayıt Ol
+              Sign Up
             </Button>
           </Form.Item>
         </Form>
 
         <div className="mt-6 pt-6 border-t border-gray-200">
           <div className="text-center">
-            <span className="text-gray-600">Zaten hesabınız var mı?</span>{' '}
+            <span className="text-gray-600">Already have an account?</span>{' '}
             <a href="/login" className="text-blue-600 hover:text-blue-700 font-semibold">
-              Giriş Yap
+              Sign In
             </a>
           </div>
         </div>

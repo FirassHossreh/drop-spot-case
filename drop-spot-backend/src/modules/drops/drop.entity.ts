@@ -4,25 +4,30 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  DeleteDateColumn,
 } from 'typeorm';
 
-@Entity('drops')
+@Entity()
 export class Drop {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', length: 200 })
+  @Column()
   title: string;
 
-  @Column({ type: 'text', nullable: true })
-  description?: string;
+  @Column()
+  description: string;
 
   @Column({ type: 'timestamp' })
   startAt: Date;
 
-  @Column({ type: 'timestamp', nullable: true })
-  endAt?: Date;
+  @Column({ type: 'timestamp' })
+  endAt: Date;
+
+  @Column({ type: 'int', default: 1 })
+  maxClaims: number;
+
+  @Column({ type: 'int', default: 0 })
+  claimedCount: number;
 
   @CreateDateColumn()
   createdAt: Date;

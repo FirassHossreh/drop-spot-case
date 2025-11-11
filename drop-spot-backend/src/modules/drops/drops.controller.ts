@@ -11,9 +11,9 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import { DropsService } from '../drops/drops.service';
-import { CreateDropDto } from '../drops/dto/create-drop.dto';
-import { UpdateDropDto } from '../drops/dto/update-drop.dto';
+import { DropsService } from './drops.service';
+import { CreateDropDto } from './dto/create-drop.dto';
+import { UpdateDropDto } from './dto/update-drop.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';

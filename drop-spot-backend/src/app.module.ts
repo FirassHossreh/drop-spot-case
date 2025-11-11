@@ -32,7 +32,7 @@ import { DropsModule } from './modules/drops/drops.module';
     AuthModule,
     DropsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

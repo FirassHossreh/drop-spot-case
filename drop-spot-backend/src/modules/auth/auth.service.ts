@@ -20,6 +20,8 @@ export class AuthService {
   ) {}
 
   async register(body: RegisterDto) {
+    const startTime = Date.now();
+
     const exist = await this.usersRepository.findOne({
       where: { email: body.email },
     });
@@ -31,12 +33,20 @@ export class AuthService {
       ...body,
       password: hashed,
       roles: 'user',
+      signupLatencyMs: Date.now() - startTime,
+      accountAgeDays: 0,
+      rapidActions: 0,
     });
 
     const saved = await this.usersRepository.save(user);
     const { password, ...userWithoutPassword } = saved;
 
-    const payload = { id: saved.id, email: saved.email, roles: saved.roles };
+    const payload = {
+      id: saved.id,
+      email: saved.email,
+      roles: saved.roles,
+      data: userWithoutPassword,
+    };
     const token = this.jwtService.sign(payload);
 
     return { user: userWithoutPassword, token };
@@ -53,11 +63,36 @@ export class AuthService {
     if (!isMatched)
       throw new UnauthorizedException('Invalid Email Or Password');
 
-    const { password, ...userWithoutPassword } = user;
+    const now = new Date();
+    const createdAt = user.createdAt;
+    const accountAgeMs = now.getTime() - createdAt.getTime();
+    const accountAgeDays = Math.floor(accountAgeMs / (1000 * 60 * 60 * 24));
 
-    const payload = { id: user.id, email: user.email, roles: user.roles };
+    await this.usersRepository.update(user.id, {
+      accountAgeDays: accountAgeDays,
+    });
+
+    const updatedUser = await this.usersRepository.findOne({
+      where: { id: user.id },
+    });
+
+    if (!updatedUser) {
+      throw new UnauthorizedException('User not found after update');
+    }
+
+    const { password, ...userWithoutPassword } = updatedUser;
+
+    const payload = {
+      id: updatedUser.id,
+      email: updatedUser.email,
+      roles: updatedUser.roles,
+      data: userWithoutPassword,
+    };
     const token = this.jwtService.sign(payload);
 
-    return { user: userWithoutPassword, token };
+    return {
+      user: userWithoutPassword,
+      token,
+    };
   }
 }

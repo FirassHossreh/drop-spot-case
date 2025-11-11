@@ -38,8 +38,8 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">Hoş Geldiniz</h2>
-          <p className="text-gray-500">Hesabınıza giriş yapın</p>
+          <h2 className="text-3xl font-bold text-gray-800 mb-2">Welcome</h2>
+          <p className="text-gray-500">Login your account</p>
         </div>
 
         <Form
@@ -56,16 +56,16 @@ export default function Login() {
             label="E-mail"
             name="email"
             rules={[
-              { required: true, message: 'Lütfen e-mail adresinizi giriniz!' },
-              { type: 'email', message: 'Geçerli bir e-mail giriniz!' },
+              { required: true, message: 'Please enter your password' },
+              { type: 'email', message: 'Please enter a valid email!' },
             ]}
           >
             <Input prefix={<MailOutlined className="text-gray-400" />} className="rounded-lg" />
           </Form.Item>
           <Form.Item
-            label="Şifre"
+            label="Password"
             name="password"
-            rules={[{ required: true, message: 'Lütfen şifrenizi giriniz!' }]}
+            rules={[{ required: true, message: 'Please enter your password' }]}
           >
             <Input.Password
               prefix={<LockOutlined className="text-gray-400" />}
@@ -78,16 +78,16 @@ export default function Login() {
               htmlType="submit"
               className="w-full h-11 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold"
             >
-              Giriş Yap
+              Login
             </Button>
           </Form.Item>
         </Form>
 
         <div className="mt-6 pt-6 border-t border-gray-200">
           <div className="text-center">
-            <span className="text-gray-600">Hesabınız yok mu?</span>{' '}
+            <span className="text-gray-600">Don't have an account?</span>{' '}
             <a href="/register" className="text-blue-600 hover:text-blue-700 font-semibold">
-              Kayıt Ol
+              Register
             </a>
           </div>
         </div>
